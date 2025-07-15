@@ -67,3 +67,4 @@ const clickHandler = e => {
 const startButtonEl = document.querySelector('.start-btn');
 
 startButtonEl.addEventListener('click', clickHandler);
+//
