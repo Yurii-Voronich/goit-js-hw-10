@@ -10,8 +10,29 @@
   <body>
     <main>
       <a class="back-link" href="./">GoBack</a>
-      <ul class="gallery"></ul>
+
+      <input type="text" id="datetime-picker" />
+      <button type="button" data-title="start" class="start-btn">Start</button>
+
+      <div class="timer">
+        <div class="field">
+          <span class="value js-days" data-title="days">00</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="field">
+          <span class="value js-hours" data-title="hours">00</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="field">
+          <span class="value js-minutes" data-title="minutes">00</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="field">
+          <span class="value js-seconds" data-title="seconds">00</span>
+          <span class="label">Seconds</span>
+        </div>
+      </div>
     </main>
-    <script type="module" src="./js/1-gallery.js"></script>
+    <script type="module" src="./js/1-timer.js"></script>
   </body>
 </html>
