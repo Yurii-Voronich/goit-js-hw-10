@@ -1,5 +1,21 @@
 import flatpickr from 'flatpickr';
+import iziToast from 'izitoast';
+
+const startButtonEl = document.querySelector('.start-btn');
+const inputFiled = document.querySelector('#datetime-picker');
 let userData = null;
+
+startButtonEl.addEventListener('click', clickHandler);
+
+startButtonEl.disabled = true;
+
+function clickHandler(e) {
+  timer.start();
+  startButtonEl.disabled = true;
+  timer.deadline = userData;
+  inputFiled.disabled = true;
+}
+
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
@@ -7,6 +23,15 @@ flatpickr('#datetime-picker', {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userData = selectedDates[0];
+    if (userData < Date.now()) {
+      iziToast.error({
+        position: 'topRight',
+        title: 'Error',
+        message: 'Please choose a date in the future',
+      });
+    } else {
+      startButtonEl.disabled = false;
+    }
   },
 });
 
@@ -25,6 +50,7 @@ const timer = {
 
       if (this.deadline <= Date.now()) {
         this.stop();
+        inputFiled.disabled = false;
         return;
       }
       let { days, hours, minutes, seconds } = this.convertMs(diff);
@@ -59,12 +85,3 @@ const timer = {
     return v.toString().padStart(2, '0');
   },
 };
-const clickHandler = e => {
-  timer.deadline = userData;
-  timer.start();
-};
-
-const startButtonEl = document.querySelector('.start-btn');
-
-startButtonEl.addEventListener('click', clickHandler);
-//
